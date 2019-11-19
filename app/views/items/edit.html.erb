@@ -1,2 +1,16 @@
-<h1>Items#edit</h1>
-<p>Find me in app/views/items/edit.html.erb</p>
+<div class="container my-5" style="padding-bottom: 150px;">
+  <div class="mt-5 row justify-content-center">
+    <div class="card p-5" style="border-radius: 10px;">
+      <h1 class ="mb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px;">Add a New Item</h1>
+
+      <%= simple_form_for @item do |f| %>
+        <%= f.input :photo, label: false %>
+        <%= f.input :photo_cache, as: :hidden %>
+        <%= f.input :name, label: false, placeholder: "Name*" %>
+        <%= f.input :description, label: false, placeholder: "Description" %>
+        <%= f.input :address, label: false, placeholder: "Address" %>
+        <%= f.button :submit, 'Add it', class: 'btn mt-1', style: "text-align: right; border-radius: 10px; color: white; background-color: black; font-family: 'Raleway', sans-serif; letter-spacing: 2px; font-size: 20px;"%>
+      <% end %>
+    </div>
+  </div>
+</div>
