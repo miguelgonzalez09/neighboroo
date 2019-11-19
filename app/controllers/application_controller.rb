@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+<<<<<<< HEAD
+=======
+  protect_from_forgery with: :exception
+>>>>>>> 3938c6ec15e58ddfb684837e942c67633074a1e9
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   before_action :authenticate_user!, except: [:home, :index, :show]
@@ -32,4 +36,9 @@ class ApplicationController < ActionController::Base
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: [:photo])
   end
+<<<<<<< HEAD
 end
+=======
+  
+end
+>>>>>>> 3938c6ec15e58ddfb684837e942c67633074a1e9
