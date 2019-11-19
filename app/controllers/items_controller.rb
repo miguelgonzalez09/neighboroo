@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   def index
     @items = policy_scope(Item).order(created_at: :desc)
 
-<<<<<<< HEAD
     @g_items = Item.geocoded #returns flats with coordinates
 
     @markers = @g_items.map do |item|
@@ -14,8 +13,6 @@ class ItemsController < ApplicationController
         infoWindow: render_to_string(partial: "shared/info_window", locals: { item: item })
       }
     end
-=======
->>>>>>> 3938c6ec15e58ddfb684837e942c67633074a1e9
   end
 
   def show
