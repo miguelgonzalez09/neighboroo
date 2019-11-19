@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
   belongs_to :user
 
   validates_presence_of :photo, message: 'please :)'
