@@ -15,6 +15,10 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'cloudinary'
+gem 'carrierwave'
+gem 'pundit'
+gem 'geocoder'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -28,7 +32,4 @@ group :development, :test do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'dotenv-rails'
 end
-gem 'pundit'
-gem 'dotenv-rails', groups: [:development, :test]
-gem 'cloudinary', '~> 1.9.1'
-gem 'carrierwave', '~> 1.2'
+

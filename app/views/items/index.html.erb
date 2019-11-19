@@ -1,4 +1,55 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
 
-                    
+<div class="container-fluid p-0" style=" margin-left: -15px; margin-right: -15px;">
+    <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px;">
+      <div class="col-sm-4 col-md-5 col-lg-5 d-none d-md-block" style="position: sticky; top: 67.5px; height: 100vh; padding-bottom: 50px;">
+        <div
+          id="map"
+          class=""
+          style="position: absolute; width: 100%; height: 92.5vh; top: 0; bottom: 0"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+        ></div>
+       
+      </div>
+      <div class="col-md-7 justify-content-center" style="padding-bottom: 50px;">
+        <div class="col-md-12">
+          <div class="container-fluid my-5 m-0">
+            <div class="row justify-content-center">
+              <% @items.each do |item| %>
+                <div class="card mb-3 mr-4" style="width: 200px; border-radius: 10px;">
+                  <%= link_to item_path(item) do %>
+                    <div class='profile-pic'>
+                      <%= cl_image_tag item.photo, height: 200, width: 200, crop: :fill, class: 'card-img-top', style: 'border-radius: 10px 10px 0 0;' %>
+                      <div class="edit">
+                        <div class="justify-content-center">
+                          <% if policy(item).edit? %>
+                            <%= link_to edit_item_path(item) do %>
+                              <i class="fas fa-pencil-alt"></i>
+                            <% end %>
+                          <% end %>
+                          <% if policy(item).destroy? %>
+                            <%= link_to item_path(item), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                              <i class="fas fa-trash-alt ml-1"></i>
+                            <% end %>
+                             
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                  <div class="card-body px-5">
+                    <h5 class="card-title"><%= item.name %></h5>
+                    <p class="card-text"><%= item.description %></p>
+                    <% if current_user.id != item.user_id %>
+                      <%= link_to item_path(item), style: 'color:green;' do %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

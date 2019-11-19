@@ -4,6 +4,15 @@ class ItemsController < ApplicationController
   def index
     @items = policy_scope(Item).order(created_at: :desc)
 
+    @g_items = Item.geocoded #returns flats with coordinates
+
+    @markers = @g_items.map do |item|
+      {
+        lat: item.latitude,
+        lng: item.longitude,
+        #infoWindow: render_to_string(partial: "shared/info_window", locals: { item: item })
+      }
+    end
   end
 
   def show
