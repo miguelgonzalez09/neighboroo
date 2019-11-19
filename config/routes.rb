@@ -5,3 +5,7 @@ Rails.application.routes.draw do
   resources :items
   resources :bookings, only: [:index, :create, :destroy]
 end
+
+#devise_for :users, controllers: {
+        #sessions: 'users/sessions'
+  #}
