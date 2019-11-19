@@ -2,3 +2,54 @@
 @import "alert";
 @import "avatar";
 @import "navbar";
+@import "mapbox-gl";
+
+.card-body {
+  color: black;
+  font-family: 'Domaine Display Narrow Regular';
+  text-decoration: none;
+  text-align: center;
+}
+
+.card-body:hover {
+  opacity: .8;
+}
+
+.profile-pic {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-pic:hover .edit {
+  display: block;
+}
+
+.edit {
+  position: absolute;
+  padding-right: 20px;
+  right: 5px;
+  top: 10px;
+  display: none;
+}
+
+.fas {
+  color: lightgrey;
+  font-size: 32px;
+}
+
+.fas:hover {
+  text-shadow: 0 2px 3px lightgrey;
+  color: darkgrey;
+}
+@font-face {
+  font-family: 'Domaine Display Regular';
+  src: url('/app/assets/fonts/Domaine Display Regular/fonts/DomaineDispRegular.woff')
+}
+@font-face {
+  font-family: 'Domaine Display Narrow Regular';
+  src: url('/app/assets/fonts/Domaine Display Narrow Regular/fonts/DomaineDispNar-Regular.woff')
+}
+@font-face {
+  font-family: 'Domaine Display Semibold';
+  src: url('/app/assets/fonts/Domaine Display Semibold/fonts/DomaineDisp-Semibold.woff')
+}
