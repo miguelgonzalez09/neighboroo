@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  helper_method :resource_name, :resource, :devise_mapping, :resource_class
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   before_action :authenticate_user!, except: [:home, :index, :show]
@@ -19,7 +21,23 @@ class ApplicationController < ActionController::Base
   #   flash[:alert] = "You are not authorized to perform this action."
   #   redirect_to(root_path)
   # end
+  
+  def resource_name
+    :user
+  end
 
+  def resource
+    @resource ||= User.new
+  end
+
+  def resource_class
+    User
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+  
   private
 
   def skip_pundit?
@@ -32,6 +50,5 @@ class ApplicationController < ActionController::Base
 
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: [:photo])
-  end
-  
+  end  
 end
