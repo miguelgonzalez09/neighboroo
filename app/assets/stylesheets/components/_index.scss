@@ -10,6 +10,36 @@
   text-decoration: none;
   text-align: center;
 }
+.hero-image {
+  position: relative;
+}
+
+.search.bar {
+  width: 80%;
+  margin: 0 auto;
+  position: absolute;
+  bottom: -40px;
+  .search-form {
+    position: relative;
+    #search-form-button {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      padding: 12px;
+      border-radius: 36px;
+    }
+    
+    #query {
+      height: 60px;
+      border-radius: 30px;
+      border: none;
+      box-shadow: 0 4px 5px lightgray;
+    }
+  }
+}
+
+
+
 
 .card-body:hover {
   opacity: .8;

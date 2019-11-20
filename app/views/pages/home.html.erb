@@ -14,4 +14,15 @@
       </ul>
     </div>
   </div>
+  <div class="search bar">
+    <%= form_tag items_path, method: :get, class: 'search-form' do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control px-5",
+        placeholder: "Search for items"
+      %>
+      <%= submit_tag "Search", class: "btn px-5", id: 'search-form-button' %>
+    <% end %>
+  </div>
 </div>
+
