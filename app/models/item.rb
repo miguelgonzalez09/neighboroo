@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  include AlgoliaSearch
   mount_uploader :photo, PhotoUploader
   belongs_to :user
   mount_uploader :photo, PhotoUploader
@@ -9,4 +10,10 @@ class Item < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  algoliasearch do
+    attributes :name, :address
+    searchableAttributes ['name', 'address']
+  end
+
 end
