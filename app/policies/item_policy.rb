@@ -23,4 +23,7 @@ class ItemPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
+  def user_items?
+    true
+  end
 end
