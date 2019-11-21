@@ -51,31 +51,38 @@ body, html {
   color: white;
 }
 @media screen and (min-width: 901px) {
-  h1 {
-    font-size: 80px;
+  .hero-content {
+      h1 {
+      font-size: 80px;
+    }
+      p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
   }
-  p {
-    font-size: 20px;
-    margin-bottom: 30px;
-  }
-  ul {
-    padding: 0;
-    justify-content: center;
+    .hero-media {
+      ul {
+      padding: 0;
+      justify-content: center;
+    }
   }
 }
 @media screen and (max-width: 900px) {
   .hero-content {
     margin-top: 50vh;
+
+    h1 {
+      font-size: 54px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
   }
-  h1 {
-    font-size: 54px;
-  }
-  p {
-    font-size: 16px;
-    margin-bottom: 30px;
-  }
-  ul {
-    padding: 50% 0 0 0;
-    justify-content: space-between;
+  .hero-media {
+    ul {
+      padding: 50% 0 0 0;
+      justify-content: space-between;
+    }
   }
 }

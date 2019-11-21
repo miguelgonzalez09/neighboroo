@@ -1,17 +1,27 @@
 .navbar {
-  background: #60CA58;
   justify-content: space-between;
   padding: 5vw;
   position: absolute;
   width: 100%;
+  z-index: 2;
 }
 
 .logo {
   border-radius: 50%;
   width: 120px;
+  position: relative;
+  top: 70%;
+  left: 270%;
 }
 
 .pointer {
   cursor: pointer;
 }
+
+.avatar {
+  position: relative;
+  top: -100%;
+  z-index: 3;
+}
+
 
