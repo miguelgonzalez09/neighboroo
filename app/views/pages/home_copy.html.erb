@@ -1,0 +1,48 @@
+<%= render 'shared/navbar_home' %>
+<script>
+$(document).ready(function() 
+{     
+  var client = algoliasearch('3EG2SOA15K', '024010d4d989e28aa20dd669ace79423');
+  var index = client.initIndex('Item');
+
+  $("#algoliaSearchForm").click(function(event) 
+  {             
+    event.preventDefault(); 
+    
+    var searchData = $("#query").val();
+
+    index.search(searchData, { hitsPerPage: 10, page: 0 })
+    .then(function searchDone(content) {
+      console.log(content);
+    })
+    .catch(function searchFailure(err) {
+      console.error(err);
+    });
+    
+  }); 
+}); 
+</script>
+<div class="hero-image">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Neighboroo</h1>
+      <p>All you need, just a hop away!</p>
+      <button class="btn py-2">Get started</button>
+    </div>
+    <div class="hero-media">
+      <ul style="list-style: none;">
+        <li><a href="https://www.facebook.com/" target="_"><i style="color: white; padding: 7px;" class="fab fa-facebook-f"></i></a></li>
+        <li><a href="https://twitter.com/" target="_"><i style="color: white; padding: 7px;" class="fab fa-twitter"></i></a></li>
+        <li><a href="https://www.linkedin.com/" target="_"><i style="color: white; padding: 7px;" class="fab fa-linkedin-in"></i></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="search bar">
+    <form class="search-form" action="" accept-charset="UTF-8" id="algoliaSearchForm">
+      <input name="utf8" type="hidden" value="✓">
+      <input type="text" name="query" id="query" class="form-control px-5" placeholder="Search for items">
+      <input type="submit" name="commit" value="Search" class="btn px-5" id="search-form-button" data-disable-with="Search">
+    </form>
+  </div>
+</div>
+

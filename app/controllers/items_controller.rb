@@ -3,6 +3,12 @@ class ItemsController < ApplicationController
 
   def index
     @items = policy_scope(Item).order(created_at: :desc)
+    
+    if params[:query].present?
+      @items = Item.where(name: params[:query])
+    else
+      @items = Item.all
+    end
 
     @g_items = Item.geocoded #returns flats with coordinates
 
@@ -57,6 +63,7 @@ class ItemsController < ApplicationController
     @user = current_user
     @items = current_user.items
     authorize @items
+>
   end
 
   private
