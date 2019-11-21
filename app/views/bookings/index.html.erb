@@ -1,2 +1,92 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
+<div class="container-fluid p-0" style="background: white; margin-left: -15px; margin-right: -15px;">
+  <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px; height: 100vh;">
+    <div class="col-xl-2 col-lg-4 col-md-4 d-none d-md-block" style="position: sticky; height: 100vh;">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-xl-10 col-lg-8 col-md-8 col-sm-12" style="height: 100vh;">
+      <div class="col-md-12">
+        <div class="container-fluid my-5 m-0">
+          <div class="card mb-3 mr-4" style="width: 500px; border-radius: 10px;">
+            <div class="container my-5" style="padding-bottom: 150px;">
+              <div class="row no-gutters justify-content-center">
+                <div class="card mb-3 mr-4 p-4" style="width: 900px;">
+                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Your Bookings</h2>
+                  <table class="table table-hover">
+                    <tbody>
+                      <% @bookings.each do |booking| %>
+                        <tr>
+                          <th scope="row">
+                            <%= link_to item_path(booking.item) do %>
+                              <%= cl_image_tag booking.item.photo, width: 60, height: 60, crop: :fill%>
+                            <% end %>
+                          </th>
+                          <td><h5 class="card-title"><%= booking.item.name %></h5></td>
+                          <td><p class="card-text">Request to
+                            <%= User.find_by(id: booking.item.user_id).email %></p></td>
+                          <td>
+                            <% if booking.status == 1 %>
+                              accepted
+                            <% elsif booking.status == 2 %>
+                              <div class="align-top">
+                                <%= link_to booking_path(booking, booking_id: booking.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                                  <i class="fas fa-trash-alt ml-3 mr-5"></i>
+                                <% end %>
+                                pending
+                              </div>
+                            <% else %>
+                              declined
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row no-gutters justify-content-center">
+                <div class="card mb-3 mr-4 p-4" style="width: 900px;">
+                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Bookings Received</h2>
+                  <table class="table table-hover">
+                    <tbody>
+                      <% @bookingsReceived.each do |booking| %>
+                        <tr>
+                          <th scope="row">
+                            <%= link_to item_path(booking.item) do %>
+                              <%= cl_image_tag booking.item.photo, width: 60, height: 60, crop: :fill%>
+                            <% end %>
+                          </th>
+                          <td><h5 class="card-title"><%= booking.item.name %></h5></td>
+                          <td><p class="card-text">Request from
+                            <%= User.find_by(id: booking.item.user_id).email %></p></td>
+                          <td>
+                            <% if booking.status == 2 %>
+                              <%= link_to update_booking_path(booking, booking_id: booking.id, status_id: 1), method: :put do %>
+                                <i class="fas fa-check-circle" style="color:green;"></i>
+                              <% end %>
+                              <%= link_to update_booking_path(booking, booking_id: booking.id, status_id: 3), method: :put do %>
+                                <i class="fas fa-times-circle ml-3" style="color:red;"></i>
+                              <% end %>
+                            <% elsif booking.status == 1 %>
+                              accepted
+                            <% else booking.status == 3 %>
+                              declined
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,2 +1,39 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<%= render 'shared/home' %>
+<div class="container my-5" style="padding-bottom: 150px;">
+  <div class="row justify-content-center">
+    <div class="card mb-3 mr-4" style="width: 700px; border-radius: 10px;">
+      <div class='profile-pic'>
+        <%= cl_image_tag @item.photo, width: 700, height: 500, crop: :fill, class: 'card-img-top', style: 'border-radius: 10px 10px 0 0;' %>
+        <div class="edit">
+          <div class="row justify-content-center pb-3">
+            <% if policy(@item).edit? %>
+              <%= link_to edit_item_path(@item) do %>
+                <i class="fas fa-pencil-alt"></i>
+              <% end %>
+            <% end %>
+            <% if policy(@item).destroy? %>
+              <%= link_to item_path(@item), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="fas fa-trash-alt ml-3"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card-body px-5">
+        <h5 class="card-title"><%= @item.name %></h5>
+        <p class="card-text"><%= @item.description %></p>
+
+        <% if current_user.id != @item.user_id %>
+
+          <!--%= text_field_tag(:date, value = nil, html_options = {class: 'form-control datepicker', placeholder: 'mm/dd/yyyy'}) %-->
+
+          <%= link_to bookings_path(item_id: @item.id), method: :post do %>
+            <div class="btn mb-3" style="background-color: #7FB069;">Request</div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+          <!--%= link_to bookings_path(item_id: @item.id, start_date: :date), method: :post do %-->
