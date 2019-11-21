@@ -1,4 +1,4 @@
-
+<%= render 'shared/home' %>
 <div class="container-fluid p-0" style=" margin-left: -15px; margin-right: -15px;">
     <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px;">
       <div class="col-sm-4 col-md-5 col-lg-5 d-none d-md-block" style="position: sticky; top: 67.5px; height: 100vh; padding-bottom: 50px;">
@@ -9,7 +9,7 @@
           data-markers="<%= @markers.to_json %>"
           data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
         ></div>
-       
+
       </div>
       <div class="col-md-7 justify-content-center" style="padding-bottom: 50px;">
         <div class="col-md-12">
@@ -31,7 +31,7 @@
                             <%= link_to item_path(item), method: :delete, data: { confirm: 'Are you sure?' } do %>
                               <i class="fas fa-trash-alt ml-1"></i>
                             <% end %>
-                             
+
                           <% end %>
                         </div>
                       </div>

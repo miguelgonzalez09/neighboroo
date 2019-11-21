@@ -1,9 +1,9 @@
 class Item < ApplicationRecord
   mount_uploader :photo, PhotoUploader
-  belongs_to :user
-  mount_uploader :photo, PhotoUploader
 
-  #validates_presence_of :photo, message: 'please :)'
+  belongs_to :user
+
+  validates_presence_of :photo, message: 'please :)'
   validates_presence_of :name, message: 'please :) No nameless items allowed!'
   validates_presence_of :address, message: 'please :)'
 

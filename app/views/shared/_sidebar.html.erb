@@ -1,0 +1,33 @@
+<div class="pl-5 pr-3" style="background: white; border-right: 2px solid grey;">
+  <div style="height: 30vh; background: pink; display: flex;">
+    <div class='profile-pic' style="margin: auto;">
+      <%= cl_image_tag @user.photo, width: 150, height: 150, crop: :fill, style: 'border-radius: 50%;' %>
+      <div class="edit">
+        <div class="row justify-content-center pb-3">
+          <%= link_to edit_user_registration_path(@user) do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class="profile-sidebar-body">
+        <h5 class="profile-name"><%= @user.email %></h5>
+      </div>
+    </div>
+  </div>
+  <div style="height: 70vh; background: yellow;">
+    <ul style="list-style: none; display: flex; flex-direction: column; justify-content: space-between; height: 60vh;">
+      <li>
+        <%= link_to your_items_path(@item) do %>
+          YOUR ITEMS
+        <% end %>
+      </li>
+      <li><a href="">MESSAGES</a></li>
+      <li>
+        <%= link_to bookings_path(@booking) do %>
+          YOUR BOOKINGS
+        <% end %></li>
+      <li><a href="">REVIEWS</a></li>
+      <li><a href="">COUPONS</a></li>
+    </ul>
+  </div>
+</div>
