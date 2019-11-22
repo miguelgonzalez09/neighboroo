@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   def index
     @user = current_user
+    @review = Review.new
     @bookings = policy_scope(Booking).order(created_at: :asc)
     @bookingsReceived = Booking.joins(:item).where("items.user_id= ?", current_user)
   end

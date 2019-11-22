@@ -63,7 +63,6 @@ class ItemsController < ApplicationController
     @user = current_user
     @items = current_user.items
     authorize @items
->
   end
 
   private
