@@ -16,4 +16,12 @@ class Item < ApplicationRecord
     searchableAttributes ['name', 'address']
   end
 
+  def self.geocoded(items)
+    items.map do |item|
+      {
+        lat: item.latitude,
+        lng: item.longitude,
+      }
+    end
+  end
 end
