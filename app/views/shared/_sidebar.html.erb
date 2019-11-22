@@ -21,7 +21,11 @@
           YOUR ITEMS
         <% end %>
       </li>
-      <li><a href="">MESSAGES</a></li>
+      <li>
+        <%= link_to messages_path(@message) do %>
+          YOUR MESSAGES
+        <% end %>
+      </li>
       <li>
         <%= link_to bookings_path(@booking) do %>
           YOUR BOOKINGS

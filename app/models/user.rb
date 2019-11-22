@@ -7,7 +7,10 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :reviews
-  #has_many :items, through: :bookings
+  has_many :messages
+  has_many :items, through: :bookings
+  has_many :items, through: :messages
+
 
   def incoming_bookings
     bookings = []
@@ -15,5 +18,13 @@ class User < ApplicationRecord
       bookings.push(item.bookings)
     end
     bookings
+  end
+
+  def incoming_messages
+    messages = []
+    self.items.each do |item|
+      messages.push(item.messages)
+    end
+    messages
   end
 end

@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = policy_scope(Item).order(created_at: :desc)
-    
+
     if params[:query].present?
       @items = Item.where(name: params[:query])
     else
@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @message = Message.new
     authorize @item
   end
 
