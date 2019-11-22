@@ -30,6 +30,24 @@
           <%= link_to bookings_path(item_id: @item.id), method: :post do %>
             <div class="btn mb-3" style="background-color: #7FB069;">Request</div>
           <% end %>
+
+          <%= simple_form_for [@item, @message] do |f| %>
+            <div class="form-inputs">
+              <%= f.input :body,
+                          required: false,
+                          autofocus: true,
+                          input_html: { autocomplete: "body" } %>
+            </div>
+
+            <div class="form-actions">
+              <%= f.button :submit, "Message" %>
+            </div>
+          <% end %>
+
+
+
+
+
         <% end %>
       </div>
     </div>
