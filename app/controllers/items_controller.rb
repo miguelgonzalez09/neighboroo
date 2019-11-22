@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
     else
       @items = Item.all
     end
-
+    
     @g_items = Item.geocoded #returns flats with coordinates
 
     @markers = @g_items.map do |item|
