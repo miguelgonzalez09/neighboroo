@@ -1,0 +1,68 @@
+<div class="container-fluid p-0" style="background: white; margin-left: -15px; margin-right: -15px;">
+  <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px; height: 100vh;">
+    <div class="col-xl-2 col-lg-4 col-md-4 d-none d-md-block" style="position: sticky; height: 100vh;">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-xl-10 col-lg-8 col-md-8 col-sm-12" style="height: 100vh;">
+      <div class="col-md-12">
+        <div class="container-fluid my-5 m-0">
+          <div class="card mb-3 mr-4" style="width: 500px; border-radius: 10px;">
+            <div class="container my-5" style="padding-bottom: 150px;">
+              <div class="row no-gutters justify-content-center">
+                <div class="card mb-3 mr-4 p-4" style="width: 900px;">
+                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Messages Sent</h2>
+                  <table class="table table-hover">
+                    <tbody>
+                      <% @messages.each do |message| %>
+                        <tr>
+                          <th scope="row">
+                            <%= link_to item_path(message.item) do %>
+                              <%= cl_image_tag message.item.photo, width: 60, height: 60, crop: :fill%>
+                            <% end %>
+                          </th>
+                          <td><h5 class="card-title"><%= message.item.name %></h5></td>
+                          <td><p class="card-text">Request to
+                            <%= User.find_by(id: message.item.user_id).email %></p></td>
+                          <td><p class="card-text">
+                            <%= message.body %></p></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row no-gutters justify-content-center">
+                <div class="card mb-3 mr-4 p-4" style="width: 900px;">
+                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Messages Received</h2>
+                  <table class="table table-hover">
+                    <tbody>
+                      <% @messagesReceived.each do |message| %>
+                        <tr>
+                          <th scope="row">
+                            <%= link_to item_path(message.item) do %>
+                              <%= cl_image_tag message.item.photo, width: 60, height: 60, crop: :fill%>
+                            <% end %>
+                          </th>
+                          <td><h5 class="card-title"><%= message.item.name %></h5></td>
+                          <td><p class="card-text">Request from
+                            <%= User.find_by(id: message.item.user_id).email %></p></td>
+                          <td><p class="card-text">
+                            <%= message.body %></p></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
