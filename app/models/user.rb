@@ -6,9 +6,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
+  has_many :reviews
   has_many :messages
   has_many :items, through: :bookings
   has_many :items, through: :messages
+
 
   def incoming_bookings
     bookings = []

@@ -29,9 +29,10 @@
       <li>
         <%= link_to bookings_path(@booking) do %>
           YOUR BOOKINGS
-        <% end %>
-      </li>
-      <li><a href="">REVIEWS</a></li>
+        <% end %></li>
+      <li><%= link_to reviews_path(@review) do %>
+          YOUR REVIEWS
+        <% end %></li>
       <li><a href="">COUPONS</a></li>
     </ul>
   </div>

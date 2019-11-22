@@ -38,6 +38,19 @@
                             <% end %>
                           </td>
                         </tr>
+                        <tr>
+                          <td>
+                            <%= simple_form_for [booking, @review] do |f| %>
+                              <%= f.input :body, 
+                                          label: false,
+                                          required: false %>
+                              <%= f.input :rating, 
+                                          required: true %>
+                              <%= f.input :user_id, as: :hidden, input_html: {value: booking.item.user_id }  %>
+                              <%= f.button :submit, 'Add Review', class: 'btn mt-1', style: "text-align: right; border-radius: 10px; color: white; background-color: black; font-family: 'Raleway', sans-serif; letter-spacing: 2px; font-size: 20px;"%>
+                            <% end %>
+                          </td>
+                        </tr>
                       <% end %>
                     </tbody>
                   </table>
