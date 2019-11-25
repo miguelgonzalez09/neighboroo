@@ -5,20 +5,12 @@ class ItemsController < ApplicationController
     @items = policy_scope(Item).order(created_at: :asc)
 
     if params[:query].present?
-      @items = Item.where(name: params[:query])
+      @items = Item.where("name ILIKE ?", "%#{params[:query]}%")
     else
       @items = Item.all
     end
 
-    @g_items = Item.geocoded #returns flats with coordinates
-
-    @markers = @g_items.map do |item|
-      {
-        lat: item.latitude,
-        lng: item.longitude,
-        #infoWindow: render_to_string(partial: "shared/info_window", locals: { item: item })
-      }
-    end
+    @markers = Item.geocoded(@items)
   end
 
   def show
