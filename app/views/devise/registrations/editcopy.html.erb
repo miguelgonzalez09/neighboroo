@@ -1,49 +1,70 @@
-<div class="row">
-<div class="col-lg-2">
- <%= render 'shared/sidebar' %>
- </div>
-<div class="container col-lg-10 my-5" style="padding-bottom: 150px;">
-  <div class="mt-5 row justify-content-center" style="margin-bottom: 150px;">
-    <div class="card pt-5 px-5" style="text-align: left; width: 30rem; border-radius: 10px;">
-      <h2 style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px;">Edit Your Profile<!--%= resource_name.to_s.humanize %--></h2>
+<div class="container-fluid p-0" style="background: white; margin-left: -15px; margin-right: -15px;">
+  <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px; height: 100vh;">
+    <div class="col-xl-2 col-lg-4 col-md-4 d-none d-md-block" style="position: sticky; height: 100vh;">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-xl-10 col-lg-8 col-md-8 col-sm-12" style="height: 100vh;">
+      <div class="col-md-12">
+        <div class="container-fluid my-5 m-0">
+          <div class="row justify-content-center">
+            <div class="card pt-5 px-5" style="text-align: left; width: 30rem; border-radius: 10px;">
+              <h2 style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px;">Edit Your Profile<!--%= resource_name.to_s.humanize %--></h2>
 
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= f.error_notification %>
+              <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                <%= f.error_notification %>
 
-        <div class="form-inputs">
-          <%= f.input :photo, required: true, label: false %>
-          <%= f.input :photo_cache, as: :hidden %>
-          <%= f.input :email, required: true, autofocus: true %>
+                <div class="form-inputs">
+                  <%= f.input :photo, required: true, label: false %>
+                  <%= f.input :photo_cache, as: :hidden %>
+                  <%= f.input :first_name,
+                              autofocus: true,
+                              input_html: { autocomplete: "first name" }%>
+                  <%= f.input :last_name,
+                              autofocus: true,
+                              input_html: { autocomplete: "last name" }%>
+                  <%= f.input :description,
+                              autofocus: true,
+                              input_html: { autocomplete: "describe yourself briefly" }%>
+                  <%= f.input :address,
+                              autofocus: true,
+                              input_html: { autocomplete: "address" }%>
+                  <%= f.input :phone_number,
+                              autofocus: true,
+                              input_html: { autocomplete: "phone number" }%>
+                  <%= f.input :email, required: true, autofocus: true %>
 
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-          <% end %>
+                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+                  <% end %>
 
-          <%= f.input :password,
-                      hint: "leave it blank if you don't want to change it",
-                      required: false,
-                      input_html: { autocomplete: "new-password" } %>
-          <%= f.input :password_confirmation,
-                      required: false,
-                      input_html: { autocomplete: "new-password" } %>
-          <%= f.input :current_password,
-                      hint: "we need your current password to confirm your changes",
-                      required: true,
-                      input_html: { autocomplete: "current-password" } %>
+                  <%= f.input :password,
+                              hint: "leave it blank if you don't want to change it",
+                              required: false,
+                              input_html: { autocomplete: "new-password" } %>
+                  <%= f.input :password_confirmation,
+                              required: false,
+                              input_html: { autocomplete: "new-password" } %>
+                  <%= f.input :current_password,
+                              hint: "we need your current password to confirm your changes",
+                              required: true,
+                              input_html: { autocomplete: "current-password" } %>
+                </div>
+
+                <div class="form-actions">
+                  <%= f.button :submit, "Update" %>
+                </div>
+              <% end %>
+
+              <h3>Cancel my account</h3>
+
+              <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+              <%= link_to "Back", :back %>
+              <%= render "devise/shared/links" %>
+            </div>
+          </div>
         </div>
-
-        <div class="form-actions">
-          <%= f.button :submit, "Update" %>
-        </div>
-      <% end %>
-
-      <h3>Cancel my account</h3>
-
-      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-      <%= link_to "Back", :back %>
-      <%= render "devise/shared/links" %>
+      </div>
     </div>
   </div>
-</div>
 </div>

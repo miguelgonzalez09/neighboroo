@@ -9,6 +9,7 @@
     <%= link_to "Your Items", your_items_path(@item), class: "user-links" %>
     <%= link_to "Your Bookings", bookings_path(@booking), class: "user-links" %>
     <%= link_to "Your Messages", messages_path(@booking), class: "user-links" %>
+    <%= link_to "Your Reviews", reviews_path(@review), class: "user-links" %>
     <%= link_to "Settings", edit_user_registration_path(@user), class: "user-links" %>
     <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "user-links", style: "margin-bottom: 24px;" %>
   <% else %>
