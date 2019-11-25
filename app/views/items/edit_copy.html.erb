@@ -1,0 +1,25 @@
+<div class="container-fluid p-0" style="background: white; margin-left: -15px; margin-right: -15px;">
+  <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px; height: 100vh;">
+    <div class="col-xl-2 col-lg-4 col-md-4 d-none d-md-block" style="position: sticky; height: 100vh;">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-xl-10 col-lg-8 col-md-8 col-sm-12" style="height: 100vh;">
+      <div class="col-md-12">
+        <div class="container-fluid my-5 m-0">
+          <div class="card mb-3 mr-4" style="width: 500px; border-radius: 10px;">
+            <h1 class ="mb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px;">Update Item</h1>
+
+            <%= simple_form_for @item do |f| %>
+              <%= f.input :photo, label: false %>
+              <%= f.input :photo_cache, as: :hidden %>
+              <%= f.input :name, label: false, placeholder: "Name*" %>
+              <%= f.input :description, label: false, placeholder: "Description" %>
+              <%= f.input :address, label: false, placeholder: "Address" %>
+              <%= f.button :submit, 'Update it', class: 'btn mt-1', style: "text-align: right; border-radius: 10px; color: white; background-color: black; font-family: 'Raleway', sans-serif; letter-spacing: 2px; font-size: 20px;"%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

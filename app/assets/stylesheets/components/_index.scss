@@ -1,24 +1,18 @@
 // Import your components CSS files here.
 @import "alert";
 @import "avatar";
-@import "navbar";
 @import "mapbox-gl";
 
-.card-body {
-  color: black;
-  font-family: 'Domaine Display Narrow Regular';
-  text-decoration: none;
-  text-align: center;
-}
+
 .hero-image {
   position: relative;
+  width: 100%;
 }
 
 .search.bar {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
-  position: absolute;
-  bottom: -40px;
+  margin-top: 60px;
   .search-form {
     position: relative;
     #search-form-button {
@@ -28,7 +22,7 @@
       padding: 12px;
       border-radius: 36px;
     }
-    
+
     #query {
       height: 60px;
       border-radius: 30px;
@@ -38,39 +32,98 @@
   }
 }
 
-
-
-
-.card-body:hover {
-  opacity: .8;
+.item-card {
+  //overflow: hidden;
+  height: 200px;
+  background: white;
+  //box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  //align-items: center;
 }
 
-.profile-pic {
+.item-card-photo {
+  height: 100%;
+  width: 200px;
+  object-fit: cover;
+}
+
+.item-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.item-card p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  height: 64px;
+}
+
+.item-card .item-card-infos {
+  padding: 32px 16px 16px 16px;
+  height: 200px;
+}
+
+.item-card-infos-link {
+  color: black;
+}
+
+.item-card-infos-link:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+.item-card {
   position: relative;
-  display: inline-block;
+  //display: inline-block;
 }
 
-.profile-pic:hover .edit {
+.item-card:hover .item-edit {
   display: block;
 }
 
-.edit {
+.item-edit {
   position: absolute;
   padding-right: 20px;
   right: 5px;
-  top: 10px;
+  top: 2px;
   display: none;
+  z-index: 2;
 }
 
-.fas {
+.index-link {
+  position: absolute;
+  padding-right: 20px;
+  right: -6px;
+  top: 175px;
+  color: #f5b130;
+}
+
+.index-link:hover {
+  color: #e4bd56;
+  text-decoration: none;
+}
+
+.item-edit .fas {
   color: lightgrey;
-  font-size: 32px;
+  font-size: 24px;
 }
 
-.fas:hover {
+.item-edit .fas:hover {
   text-shadow: 0 2px 3px lightgrey;
   color: darkgrey;
 }
+
+.neighboroo {
+  position: relative;
+  font-size: 42px;
+  color: #9D652A;
+}
+
 @font-face {
   font-family: 'Domaine Display Regular';
   src: url('/app/assets/fonts/Domaine Display Regular/fonts/DomaineDispRegular.woff')

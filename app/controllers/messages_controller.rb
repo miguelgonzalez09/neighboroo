@@ -1,8 +1,13 @@
 class MessagesController < ApplicationController
   def index
     @user = current_user
-    @messages = policy_scope(Message).order(created_at: :desc)
+    @messages = policy_scope(Message).order(created_at: :asc)
     @messagesReceived = Message.joins(:item).where("items.user_id= ?", current_user).order(created_at: :desc)
+  end
+
+  def show
+    @message = Message.find(params[:message_id])
+    authorize @message
   end
 
   def create
