@@ -53,7 +53,7 @@
                   <td><p><strong>From: </strong>
                     <%= User.find_by(id: message.item.user_id).first_name %></p></td>
                   <td>
-                    <%= link_to message_path(message, item.message.id) do %>
+                    <%= link_to message_path(message) do %>
                     <p><%= message.body %></p>
                     <% end %>
                   </td>

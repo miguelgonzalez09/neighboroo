@@ -1,70 +1,117 @@
-<div class="container-fluid p-0" style="background: white; margin-left: -15px; margin-right: -15px;">
-  <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px; height: 100vh;">
-    <div class="col-xl-2 col-lg-4 col-md-4 d-none d-md-block" style="position: sticky; height: 100vh;">
-      <%= render 'shared/sidebar' %>
+<div class="container-fluid p-0">
+  <div class="row no-gutters p-0">
+    <div class="d-none d-md-block">
+      <%= render 'shared/sidenav_fixed' %>
     </div>
-    <div class="col-xl-10 col-lg-8 col-md-8 col-sm-12" style="height: 100vh;">
-      <div class="col-md-12">
-        <div class="container-fluid my-5 m-0">
-          <div class="row justify-content-center">
-            <div class="card pt-5 px-5" style="text-align: left; width: 30rem; border-radius: 10px;">
-              <h2 style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px;">Edit Your Profile<!--%= resource_name.to_s.humanize %--></h2>
-
-              <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                <%= f.error_notification %>
-
-                <div class="form-inputs">
-                  <%= f.input :photo, required: true, label: false %>
-                  <%= f.input :photo_cache, as: :hidden %>
-                  <%= f.input :first_name,
-                              autofocus: true,
-                              input_html: { autocomplete: "first name" }%>
-                  <%= f.input :last_name,
-                              autofocus: true,
-                              input_html: { autocomplete: "last name" }%>
-                  <%= f.input :description,
-                              autofocus: true,
-                              input_html: { autocomplete: "describe yourself briefly" }%>
-                  <%= f.input :address,
-                              autofocus: true,
-                              input_html: { autocomplete: "address" }%>
-                  <%= f.input :phone_number,
-                              autofocus: true,
-                              input_html: { autocomplete: "phone number" }%>
-                  <%= f.input :email, required: true, autofocus: true %>
-
-                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-                  <% end %>
-
-                  <%= f.input :password,
-                              hint: "leave it blank if you don't want to change it",
-                              required: false,
-                              input_html: { autocomplete: "new-password" } %>
-                  <%= f.input :password_confirmation,
-                              required: false,
-                              input_html: { autocomplete: "new-password" } %>
-                  <%= f.input :current_password,
-                              hint: "we need your current password to confirm your changes",
-                              required: true,
-                              input_html: { autocomplete: "current-password" } %>
-                </div>
-
-                <div class="form-actions">
-                  <%= f.button :submit, "Update" %>
-                </div>
-              <% end %>
-
-              <h3>Cancel my account</h3>
-
-              <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-              <%= link_to "Back", :back %>
-              <%= render "devise/shared/links" %>
-            </div>
-          </div>
+    <div class="col-md-7 col-lg-9 col-xl-4 justify-content-center" style="padding-bottom: 50px; margin-left: 20px; margin-right: 20px;">
+      <div class="row" style="z-index: 5; background: white; position: sticky; top: 0;">
+        <div class="search bar" style="margin-bottom: 64px; margin-left: 30px; margin-right: 10px;">
+          <%= form_tag items_path, method: :get, class: 'search-form' do %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control px-5",
+              placeholder: "Search for items or location"
+            %>
+            <%= submit_tag "Search", class: "btn px-5", id: 'search-form-button' %>
+          <% end %>
         </div>
+      </div>
+      <div class="container-fluid mb-5 px-0" style="margin-top: 13px;">
+
+            <div class="row" style="height: 40%;">
+              <div style="display: flex; align-items: center; flex-direction: column;">
+                <%= cl_image_tag @user.photo, crop: :fill, class: 'user-avatar', style:"margin-top: 0;" %>
+                <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <div class="profile-text" style="padding-left: 50px; padding-top: 50px;">
+                  <h2><%= @user.first_name %></h2>
+                  <p><%= @user.description %></p>
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-6" style="position: sticky; top: 200px; margin-right: -50px; height: 80vh;">
+      <div class="row" style="z-index: 5; background: white; position: absolute; top: -125px; right: 30px;">
+        <h1 class="neighboroo">Neighboroo</h1>
+      </div>
+      <div class="row">
+      <div class="col-5" style="padding-left: 50px;">
+        <h2 style="margin-bottom: 50px; font-family: 'Permanent Marker', cursive; letter-spacing: 2px;">Edit Your Profile<!--%= resource_name.to_s.humanize %--></h2>
+
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <%= f.input :photo, required: true, label: false %>
+            <%= f.input :photo_cache, as: :hidden %>
+            <%= f.input :first_name, display: :inline,
+                        autofocus: true,
+                        input_html: { autocomplete: "first name" }%>
+            <%= f.input :address,
+                        autofocus: true,
+                        input_html: { autocomplete: "address" }%>
+            <%= f.input :description,
+                        autofocus: true,
+                        input_html: { autocomplete: "describe yourself briefly" }%>
+            <%= f.input :password,
+                        hint: "leave it blank if you don't want to change it",
+                        required: false,
+                        input_html: { autocomplete: "new-password" } %>
+            <%= f.input :current_password,
+                        hint: "we need your current password to confirm your changes",
+                        required: true,
+                        input_html: { autocomplete: "current-password" } %>
+          </div>
+      </div>
+
+      <div class="col-5" style="padding-top: 134px;">
+          <div class="form-inputs">
+            <%= f.input :last_name, display: :inline,
+                        autofocus: true,
+                        input_html: { autocomplete: "last name" }%>
+            <%= f.input :phone_number,
+                        autofocus: true,
+                        input_html: { autocomplete: "phone number" }%>
+            <%= f.input :email, required: true, autofocus: true, input_html: {style: "margin-bottom: 40px"} %>
+
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+
+            <%= f.input :password_confirmation,
+                        required: false,
+                        input_html: { autocomplete: "new-password"} %>
+            <!--%= f.input :expiry_date, input_html: {id: "expiry-date-input"} do %-->
+              <!--%= f.input_field :expiry_date, as: :string, class: "form-control" %-->
+              <!--span class="input-group-addon"><i class="fa fa-calendar"></i></span-->
+            <!--% end %-->
+          </div>
+
+          <div class="form-actions" style="margin-bottom: 50px;">
+            <%= f.button :submit, "Update" %>
+          </div>
+        <% end %>
+
+        <h3>Cancel my account</h3>
+
+        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+        <%= link_to "Back", :back %>
+        <%= render "devise/shared/links" %>
+
+      </div>
+      </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<!--%= link_to bookings_path(item_id: @item.id, start_date: :date), method: :post do %-->
