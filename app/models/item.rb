@@ -12,16 +12,17 @@ class Item < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   algoliasearch do
-    attributes :name, :address
-    searchableAttributes ['name', 'address']
+    attributes :name, :address #:description
+    searchableAttributes ['name', 'address']#'description'
   end
 
-  def self.geocoded(items)
-    items.map do |item|
-      {
-        lat: item.latitude,
-        lng: item.longitude,
-      }
-    end
-  end
+  # def self.geocoded(items)
+  #   items.map do |item|
+  #     {
+  #       lat: item.latitude,
+  #       lng: item.longitude,
+  #       infoWindow: render_to_string(partial: "views/shared/info_window", locals: { item: item })
+  #     }
+  #   end
+  # end
 end

@@ -10,7 +10,16 @@ class ItemsController < ApplicationController
       @items = Item.all
     end
 
-    @markers = Item.geocoded(@items)
+    # @markers = Item.geocoded(@items)
+    @items = @items.geocoded    
+    @markers = @items.map do |item|
+      {
+        lat: item.latitude,
+        lng: item.longitude,
+        infoWindow: render_to_string(partial: "/shared/info_window", locals: { item: item })
+      }
+    end
+
   end
 
   def show
@@ -65,6 +74,7 @@ class ItemsController < ApplicationController
     @user = current_user
     authorize @item
   end
+
 
   private
 
