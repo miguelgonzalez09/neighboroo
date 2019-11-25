@@ -5,7 +5,9 @@
     <div class="hero-text">
       <h1>Neighboroo</h1>
       <p>All you need, just a hop away!</p>
-      <button class="btn py-2">Get started</button>
+      <%= link_to items_path(@item) do %>
+        <button class="btn py-2">Get started</button>
+      <% end %>
     </div>
     <div class="hero-media">
       <ul style="list-style: none;">
