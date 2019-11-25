@@ -1,0 +1,45 @@
+.show-edit {
+  position: absolute;
+  right: 35px;
+  top: 210px;
+  display: none;
+  z-index: 2;
+}
+.show-card:hover .show-edit {
+  display: block;
+}
+
+.show-edit .fas {
+  color: lightgrey;
+  font-size: 32px;
+}
+
+.show-edit .fas:hover {
+  text-shadow: 0 2px 3px lightgrey;
+  color: darkgrey;
+}
+
+.show-connect {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+.show-share {
+  color: black;
+  opacity: .6;
+  font-size: 28px;
+}
+
+.show-share:hover {
+  color: darkgrey;
+}
+
+.show-card .card-body {
+  text-align: justify;
+  h2 {
+    padding: 50px 30px 15px 30px;
+  }
+  p {
+    padding: 50px 30px 15px 30px;
+  }
+}

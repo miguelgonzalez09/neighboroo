@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   #   flash[:alert] = "You are not authorized to perform this action."
   #   redirect_to(root_path)
   # end
-  
+
   def resource_name
     :user
   end
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
-  
+
   private
 
   def skip_pundit?
@@ -46,9 +46,9 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:photo])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:photo, :first_name, :last_name, :address, :phone_number, :description])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:photo])
-  end  
+    devise_parameter_sanitizer.permit(:account_update, keys: [:photo, :first_name, :last_name, :address, :phone_number, :description])
+  end
 end

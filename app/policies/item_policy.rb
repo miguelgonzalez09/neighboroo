@@ -26,4 +26,7 @@ class ItemPolicy < ApplicationPolicy
   def user_items?
     true
   end
+  def request_item?
+    true
+  end
 end

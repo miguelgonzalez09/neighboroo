@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :request_item]
 
   def index
-    @items = policy_scope(Item).order(created_at: :desc)
+    @items = policy_scope(Item).order(created_at: :asc)
 
     if params[:query].present?
       @items = Item.where(name: params[:query])
@@ -29,6 +29,7 @@ class ItemsController < ApplicationController
   def new
     @user = current_user
     @item = Item.new
+    @items = Item.all
     authorize @item
   end
 
@@ -45,6 +46,7 @@ class ItemsController < ApplicationController
 
   def edit
     @user = current_user
+    @items = Item.all
     authorize @item
   end
 
@@ -62,8 +64,14 @@ class ItemsController < ApplicationController
 
   def user_items
     @user = current_user
-    @items = current_user.items
+    @items = Item.all
     authorize @items
+  end
+
+  def request_item
+    @message = Message.new
+    @user = current_user
+    authorize @item
   end
 
   private

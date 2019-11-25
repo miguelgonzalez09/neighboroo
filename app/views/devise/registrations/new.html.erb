@@ -12,6 +12,10 @@
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "last name" }%>
+    <%= f.input :description,
+                required: false,
+                autofocus: true,
+                input_html: { autocomplete: "describe yourself briefly" }%>
     <%= f.input :address,
                 required: true,
                 autofocus: true,

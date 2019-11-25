@@ -1,55 +1,71 @@
-<%= render 'shared/home' %>
-<div class="container-fluid p-0" style=" margin-left: -15px; margin-right: -15px;">
-    <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px;">
-      <div class="col-sm-4 col-md-5 col-lg-5 d-none d-md-block" style="position: sticky; top: 67.5px; height: 100vh; padding-bottom: 50px;">
-        <div
-          id="map"
-          class=""
-          style="position: absolute; width: 100%; height: 92.5vh; top: 0; bottom: 0"
-          data-markers="<%= @markers.to_json %>"
-          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-        ></div>
-
+<div class="container-fluid p-0">
+  <div class="row no-gutters p-0">
+    <div class="d-none d-md-block">
+      <%= render 'shared/sidenav_fixed' %>
+    </div>
+    <div class="col-md-7 col-lg-9 col-xl-4 justify-content-center" style="padding-bottom: 50px; margin-left: 20px; margin-right: 20px;">
+      <div class="row" style="z-index: 5; background: white; position: sticky; top: 0;">
+        <div class="search bar" style="margin-bottom: 64px; margin-left: 30px; margin-right: 10px;">
+          <%= form_tag items_path, method: :get, class: 'search-form' do %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control px-5",
+              placeholder: "Search for items or location"
+            %>
+            <%= submit_tag "Search", class: "btn px-5", id: 'search-form-button' %>
+          <% end %>
+        </div>
       </div>
-      <div class="col-md-7 justify-content-center" style="padding-bottom: 50px;">
-        <div class="col-md-12">
-          <div class="container-fluid my-5 m-0">
-            <div class="row justify-content-center">
-              <% @items.each do |item| %>
-                <div class="card mb-3 mr-4" style="width: 200px; border-radius: 10px;">
-                  <%= link_to item_path(item) do %>
-                    <div class='profile-pic'>
-                      <%= cl_image_tag item.photo, height: 200, width: 200, crop: :fill, class: 'card-img-top', style: 'border-radius: 10px 10px 0 0;' %>
-                      <div class="edit">
-                        <div class="justify-content-center">
-                          <% if policy(item).edit? %>
-                            <%= link_to edit_item_path(item) do %>
-                              <i class="fas fa-pencil-alt"></i>
-                            <% end %>
-                          <% end %>
-                          <% if policy(item).destroy? %>
-                            <%= link_to item_path(item), method: :delete, data: { confirm: 'Are you sure?' } do %>
-                              <i class="fas fa-trash-alt ml-1"></i>
-                            <% end %>
-
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  <% end %>
-                  <div class="card-body px-5">
-                    <h5 class="card-title"><%= item.name %></h5>
-                    <p class="card-text"><%= item.description %></p>
-                    <% if current_user.id != item.user_id %>
-                      <%= link_to item_path(item), style: 'color:green;' do %>
+      <div class="container-fluid mb-5 m-0">
+        <% @items.each do |item| %>
+          <div style="border-bottom: 1px solid lightgrey;">
+            <div class="item-card my-3">
+              <div class="profile-pic">
+                <div class="item-edit">
+                  <div class="row justify-content-center pb-3">
+                    <% if policy(item).edit? %>
+                      <%= link_to edit_item_path(item) do %>
+                        <i class="fas fa-pencil-alt"></i>
+                      <% end %>
+                    <% end %>
+                    <% if policy(item).destroy? %>
+                      <%= link_to item_path(item), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                        <i class="fas fa-trash-alt ml-3"></i>
                       <% end %>
                     <% end %>
                   </div>
                 </div>
+                <%= cl_image_tag item.photo, class:"item-card-photo" %>
+              </div>
+              <%= link_to item_path(item), class:'item-card-infos-link' do %>
+                <div class="item-card-infos">
+                  <h2><%= item.name %></h2>
+                  <p><%= item.description %></p>
               <% end %>
+                  <% if user_signed_in? %>
+                    <% if current_user.id != item.user_id %>
+                      <%= link_to item_path(item), class:'index-link' do %>
+                        ➻ borrow it
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
+    <div class="col-md-12 col-lg-12 col-xl-6" style="position: sticky; top: 200px; margin-right: -50px; height: 80vh;">
+      <div class="row" style="z-index: 5; background: white; position: absolute; top: -125px; right: 30px;">
+        <h1 class="neighboroo">Neighboroo</h1>
+      </div>
+      <div
+        id="map"
+        class=""
+        style="position: absolute; width: 100%; height: 80vh; top: 0; bottom: 0;"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+      ></div>
+    </div>
   </div>
+</div>

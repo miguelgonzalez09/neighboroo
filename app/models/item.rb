@@ -15,5 +15,4 @@ class Item < ApplicationRecord
     attributes :name, :address
     searchableAttributes ['name', 'address']
   end
-
 end

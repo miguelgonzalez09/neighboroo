@@ -14,14 +14,16 @@ const initMapbox = () => {
 
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/rizudesu/ck2zc1vig18r41dlqnnquy76z'
+      style: 'mapbox://styles/rizudesu/ck3b9oxwz1w3b1cpg44mk1th9'
     });
     // map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken }));
     const markers = JSON.parse(mapElement.dataset.markers);
     markers.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.infoWindow); // add this
 
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({
+        color: `rgb(${245}, ${177}, ${48})`
+        })
         .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup)
         .addTo(map);

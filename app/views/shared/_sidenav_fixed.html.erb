@@ -1,0 +1,30 @@
+<div class="sidenav sidenav-sticky">
+  <a href="/">
+      <%= image_tag "roo.png", class:"logo" %>
+  </a>
+
+  <% if user_signed_in? %>
+    <a href="#" class="links">Hello, <%= current_user.first_name %> !</a>
+    <%= link_to "Add An Item", new_item_path(@item), class: "user-links" %>
+    <%= link_to "Your Items", your_items_path(@item), class: "user-links" %>
+    <%= link_to "Your Bookings", bookings_path(@booking), class: "user-links" %>
+    <%= link_to "Your Messages", messages_path(@booking), class: "user-links" %>
+    <%= link_to "Settings", edit_user_registration_path(@user), class: "user-links" %>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "user-links", style: "margin-bottom: 24px;" %>
+  <% else %>
+    <%= link_to "> Login", new_user_session_path, class: "links" %>
+    <!--%= render 'shared/login_form' %-->
+  <% end %>
+
+  <%= link_to "Search", items_path(@item), class: "links lupa" %>
+  <a href="#" class="links">About</a>
+  <a href="#" class="links">FAQ</a>
+  <a href="#" class="links">Contact</a>
+
+</div>
+
+<!-- Use any element to open the sidenav -->
+<!--span id="sidenavOpen" class="menu pointer">menu</span-->
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<!--div id="main"></div-->

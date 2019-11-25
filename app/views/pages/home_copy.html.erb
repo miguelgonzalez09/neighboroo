@@ -1,14 +1,13 @@
-<%= render 'shared/navbar_home' %>
 <script>
-$(document).ready(function() 
-{     
+$(document).ready(function()
+{
   var client = algoliasearch('3EG2SOA15K', '024010d4d989e28aa20dd669ace79423');
   var index = client.initIndex('Item');
 
-  $("#algoliaSearchForm").click(function(event) 
-  {             
-    event.preventDefault(); 
-    
+  $("#algoliaSearchForm").click(function(event)
+  {
+    event.preventDefault();
+
     var searchData = $("#query").val();
 
     index.search(searchData, { hitsPerPage: 10, page: 0 })
@@ -18,9 +17,9 @@ $(document).ready(function()
     .catch(function searchFailure(err) {
       console.error(err);
     });
-    
-  }); 
-}); 
+
+  });
+});
 </script>
 <div class="hero-image">
   <div class="hero-content">

@@ -1,7 +1,7 @@
-
-<%= render 'shared/navbar_home' %>
+<%= render 'shared/sidenav' %>
+<span id="sidenavOpen" class="menu pointer">menu</span>
 <div class="hero-image">
-  <div class="hero-content">
+  <div class="hero-content" id="main">
     <div class="hero-text">
       <h1>Neighboroo</h1>
       <p>All you need, just a hop away!</p>
@@ -15,16 +15,4 @@
       </ul>
     </div>
   </div>
-  <div class="search bar">
-    <%= form_tag items_path, method: :get, class: 'search-form' do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control px-5",
-        placeholder: "Search for items"
-      %>
-      <%= submit_tag "Search", class: "btn px-5", id: 'search-form-button' %>
-    <% end %>
-  </div>
 </div>
-
-<%= render 'shared/footer' %>
