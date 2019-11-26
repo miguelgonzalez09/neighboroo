@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     end
 
     # @markers = Item.geocoded(@items)
-    @items = @items.geocoded    
+    @items = @items.geocoded
     @markers = @items.map do |item|
       {
         lat: item.latitude,
@@ -19,11 +19,18 @@ class ItemsController < ApplicationController
         infoWindow: render_to_string(partial: "/shared/info_window", locals: { item: item })
       }
     end
-
   end
 
   def show
     @message = Message.new
+    @item = @item.geocoded
+    @markers = @item.map do |item|
+      {
+        lat: item.latitude,
+        lng: item.longitude,
+        infoWindow: render_to_string(partial: "/shared/info_window", locals: { item: item })
+      }
+    end
     authorize @item
   end
 
