@@ -28,11 +28,13 @@ class ItemsController < ApplicationController
 
   def show
     @message = Message.new
+
     @markers =[ {
         lat: @item.latitude,
         lng: @item.longitude,
         infoWindow: render_to_string(partial: "/shared/info_window", locals: { item: @item })
       }]
+
     authorize @item
   end
 
