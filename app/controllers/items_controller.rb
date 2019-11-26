@@ -64,7 +64,7 @@ class ItemsController < ApplicationController
 
   def update
     @item.update!(item_params)
-    redirect_to your_items_path
+    redirect_to item_path
     authorize @item
   end
 
