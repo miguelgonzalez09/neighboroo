@@ -16,9 +16,11 @@ initMapbox();
 
 const sidenavOpen = document.getElementById("sidenavOpen");
 
-sidenavOpen.addEventListener("click", function(){
-  openNav();
-})
+if (sidenavOpen) {
+  sidenavOpen.addEventListener("click", function(){
+    openNav();
+  })
+}
 
 function openNav() {
   document.getElementById("sidenav").style.width = "250px";
@@ -27,20 +29,17 @@ function openNav() {
 
 const sidenavClose = document.getElementById("sidenavClose");
 
-sidenavClose.addEventListener("click", function(){
-  closeNav();
-})
+if (sidenavClose) {
+  sidenavClose.addEventListener("click", function(){
+    closeNav();
+  })  
+}
 
 function closeNav() {
   document.getElementById("sidenav").style.width = "0";
   document.getElementById("main").style.marginLeft = "5vw";
 }
 
-
-
-//  1. add the filter based on params to the index action
-//  2. when the user clicks on the your items link
-//  3. add the param to the url with js and reload the page with that new paramr
 
 var client = algoliasearch('3EG2SOA15K', '024010d4d989e28aa20dd669ace79423');
 var index = client.initIndex('Item');
