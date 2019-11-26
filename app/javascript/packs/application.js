@@ -60,7 +60,7 @@ searchVar.addEventListener("input", (e) => {
           results.innerText = '';
         } else {
           content.hits.forEach((hit) => {
-            results.insertAdjacentHTML('beforeEnd', `<p>${hit.name}</p><p>${hit.address}</p>)`)
+            results.insertAdjacentHTML('beforeEnd', `<p>${hit.name}</p><p>${hit.address}</p><p>${hit.description}</p>)`)
           })
         }
         console.log(content)
