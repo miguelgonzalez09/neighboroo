@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
     if params[:query].present?
       @items = Item.where("name ILIKE ?", "%#{params[:query]}%")
+      @items = Item.where("description ILIKE ?", "%#{params[:query]}%")
     else
       @items = Item.all
     end
@@ -23,14 +24,14 @@ class ItemsController < ApplicationController
 
   def show
     @message = Message.new
-    @item = @item.geocoded
-    @markers = @item.map do |item|
-      {
-        lat: item.latitude,
-        lng: item.longitude,
-        infoWindow: render_to_string(partial: "/shared/info_window", locals: { item: item })
-      }
-    end
+    # @item = @item.geocoded
+    # @markers = @item.map do |item|
+    #   {
+    #     lat: item.latitude,
+    #     lng: item.longitude,
+    #     infoWindow: render_to_string(partial: "/shared/info_window", locals: { item: item })
+    #   }
+    # end
     authorize @item
   end
 

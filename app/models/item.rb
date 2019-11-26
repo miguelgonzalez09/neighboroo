@@ -12,8 +12,8 @@ class Item < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   algoliasearch do
-    attributes :name, :address #:description
-    searchableAttributes ['name', 'address']#'description'
+    attributes :name, :address, :description
+    searchableAttributes ['name', 'address','description']
   end
 
   # def self.geocoded(items)
