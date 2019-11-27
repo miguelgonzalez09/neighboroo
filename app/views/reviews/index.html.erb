@@ -1,58 +1,109 @@
-<div class="container-fluid p-0" style="background: white; margin-left: -15px; margin-right: -15px;">
-  <div class="row no-gutters p-0" style="margin-left: -15px; margin-right: -15px; height: 100vh;">
-    <div class="col-xl-2 col-lg-4 col-md-4 d-none d-md-block" style="position: sticky; height: 100vh;">
-      <%= render 'shared/sidebar' %>
+<div class="container-fluid p-0">
+  <div class="row no-gutters p-0">
+    <div class="col-sm-0 col-md-3 col-xl-2">
+      <div class="d-none d-md-block">
+        <%= render 'shared/sidenav_fixed' %>
+      </div>
     </div>
-    <div class="col-xl-10 col-lg-8 col-md-8 col-sm-12" style="height: 100vh;">
-      <div class="col-md-12">
-        <div class="container-fluid my-5 m-0">
-          <div class="card mb-3 mr-4" style="width: 500px; border-radius: 10px;">
-            <div class="container my-5" style="padding-bottom: 150px;">
-              <div class="row no-gutters justify-content-center">
-                <div class="card mb-3 mr-4 p-4" style="width: 900px;">
+    <div class="col pl-3">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters p-0">
+          <div class="col-lg-8 col-xl-5 justify-content-center" style="padding: 0 20px 50px 20px;">
+            <div class="row no-gutters p-0" style="z-index: 5; height: 20vh; background: white; position: sticky; top: 0;">
+              <div class="search bar" style="margin: auto;">
+                <%= form_tag items_path, method: :get, class: 'search-form' do %>
+                  <%= text_field_tag :query,
+                    params[:query],
+                    class: "form-control px-5",
+                    placeholder: "Search for items or location"
+                  %>
+                  <%= submit_tag "Search", class: "btn px-5", id: 'search-form-button' %>
+                <% end %>
+              </div>
+            </div>
+            <div class="row no-gutters mb-5 p-0">
+              <div class="col-12">
+                <div>
                   <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Your Reviews</h2>
-                  <table class="table table-hover">
+                  <table class="table table-hover" style="width: 100%;">
+                    <colgroup>
+                      <col span="1" style="width: 25%;">
+                      <col span="1" style="width: 50%;">
+                      <col span="1" style="width: 25%;">
+                    </colgroup>
                     <tbody>
                       <% @reviews.each do |review| %>
                         <tr>
                           <th scope="row">
-                            <%= review.booking.item.user.first_name %>
+                            For: <%= review.booking.item.user.first_name %>
                           </th>
                           <td><h5 class="card-title"><%= review.body %></h5></td>
-                          <td><h5 class="card-title"><%= review.rating %></h5></td>
+                          <td style="text-align: center;">
+                            <% (review.rating.to_i).times do %>
+                              <span class="fas fa-star" style="color:#f5b130; letter-spacing: -3px; font-size: 16px;"></span>
+                            <% end %>
+                          </td>
                         </tr>
                       <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <div style="margin-top: 100px;">
+                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Reviews Received</h2>
+                  <table class="table table-hover" style="width: 100%;">
+                    <colgroup>
+                      <col span="1" style="width: 25%;">
+                      <col span="1" style="width: 50%;">
+                      <col span="1" style="width: 25%;">
+                    </colgroup>
+                    <tbody>
+                      <% user_rating = 0.0 %>
+                      <% num_reviews = 0 %>
+                      <% @reviewsReceived.each do |review| %>
+                        <% if review.user.id != current_user.id %>
+                          <% user_rating += review.rating.to_i %>
+                          <% num_reviews += 1 %>
+                          <tr>
+                            <th scope="row">
+                              From: <%= review.user.first_name %>
+                            </th>
+                            <td><h5 class="card-title"><%= review.body %></h5></td>
+                            <td style="text-align: center;">
+                              <% (review.rating.to_i).times do %>
+                                <span class="fas fa-star" style="color:#f5b130; letter-spacing: -3px; font-size: 16px;"></span>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      <% end %>
+                      <tr>
+                        <td></td>
+                        <td>Your rating</td>
+                        <td style="text-align: center;">
+                          <%= user_rating = user_rating / num_reviews %>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div class="row no-gutters justify-content-center">
-                <div class="card mb-3 mr-4 p-4" style="width: 900px;">
-                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Reviews Received</h2>
-                  <table class="table table-hover">
-                    <tbody>
-                      <% @reviewsReceived.each do |review| %>
-                        <tr>
-                          <th scope="row">
-                            <%= review.user.first_name %>
-                          </th>
-                          <td><h5 class="card-title"><%= review.body %></h5></td>
-                          <td><h5 class="card-title"><%= review.rating %></h5></td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>              
-              
             </div>
-
+          </div>
+          <div class="col justify-content-center" style="position: sticky; top: 0; height: 100vh;">
+            <div class="container-fluid p-0">
+              <div class="row no-gutters p-0" style="z-index: 5; background: white; height: 20vh;">
+                <div style="margin: auto; width: 100%;">
+                  <h1 class="neighboroo" style="float: right; padding-right: 20px;">Neighboroo</h1>
+                </div>
+              </div>
+              <div class="row no-gutters p-0">
+                <div class="col-12">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-

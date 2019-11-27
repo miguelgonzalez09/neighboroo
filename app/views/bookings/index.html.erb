@@ -25,71 +25,98 @@
               <div class="col-12">
                 <div>
                   <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Your Bookings</h2>
-                  <tbody>
+                  <table class="table table-hover" style="width: 100%;">
+                    <colgroup>
+                      <col span="1" style="width: 1%;">
+                      <col span="1" style="width: 70%;">
+                      <col span="1" style="width: 29%;">
+                    </colgroup>
+                    <tbody>
                       <% @bookings.each do |booking| %>
                         <tr>
-                          <th scope="row">
-                            <%= link_to request_item_path(booking.item) do %>
-                              <!--%= cl_image_tag booking.item.photo, width: 60, height: 60, crop: :fill%-->
+                          <td rowspan="2" style="padding-left: 0;">
+                            <%= link_to item_path(booking.item) do %>
+                              <%= cl_image_tag booking.item.photo, width: 120, height: 120, crop: :fill%>
                             <% end %>
-                          </th>
-                          <td><h5 class="card-title"><%= booking.item.name %></h5></td>
-                          <td><p class="card-text">Request to
-                            <%= User.find_by(id: booking.item.user_id).email %></p></td>
-                          <td>
+                          </td>
+                          <td style="text-align: center;"><h5 class="card-title"><%= booking.item.name %></h5></td>
+                          <td style="text-align: center;"><p style="padding-left: 20px;"><%= booking.date.strftime('%m-%d-%Y') %></p></td>
+                        </tr>
+                        <tr>
+                          <td style="text-align: center;"><p class="card-text">Requested to
+                            <%= User.find_by(id: booking.item.user_id).first_name %></p></td>
+                          <td style="text-align: center;">
                             <% if booking.status == 1 %>
                               accepted
                             <% elsif booking.status == 2 %>
-                              <div class="align-top">
+                              <div style="text-align: center;">
                                 <%= link_to booking_path(booking, booking_id: booking.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
-                                  <i class="fas fa-trash-alt ml-3 mr-5"></i>
+                                  <i class="fas fa-trash-alt ml-3 mr-5" style="color:grey; font-size: 32px;"></i>
                                 <% end %>
-                                pending
                               </div>
                             <% else %>
                               declined
                             <% end %>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            <%= simple_form_for [booking, @review] do |f| %>
-                              <%= f.input :body,
-                                          label: false,
-                                          required: false %>
-                              <%= f.input :rating,
-                                          required: true %>
-                              <%= f.input :user_id, as: :hidden, input_html: {value: booking.item.user_id }  %>
-                              <%= f.button :submit, 'Add Review', class: 'btn mt-1', style: "text-align: right; border-radius: 10px; color: white; background-color: black; font-family: 'Raleway', sans-serif; letter-spacing: 2px; font-size: 20px;"%>
-                            <% end %>
-                          </td>
-                        </tr>
+                        <% if Date.parse("#{booking.date}") < Date.today && booking.status == 1%>
+                          <tr>
+                            <td></td>
+                            <td >
+                              <%= simple_form_for [booking, @review] do |f| %>
+                                <%= f.error_notification %>
+                                <%= f.input :body,
+                                            label: false,
+                                            required: false,
+                                            placeholder: "leave a review",
+                                            input_html: { rows: 4 } %>
+                            </td>
+                            <td>
+                                <%= f.input :rating,
+                                            collection: 1..5,
+                                            label: false,
+                                            required: true %>
+                                <%= f.input :user_id, as: :hidden, input_html: {value: booking.item.user_id }  %>
+                                <%= f.button :submit, 'Add Review', class: 'btn mt-1', style: "width: 100%; border-radius: 10px; color: white; background-color: black; font-family: 'Raleway', sans-serif; letter-spacing: 2px; font-size: 14px;"%>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
                       <% end %>
                     </tbody>
                   </table>
                 </div>
-                <div>
+                <div style="margin-top: 100px;">
                   <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Bookings Received</h2>
-                  <table class="table table-hover">
+                  <table class="table table-hover" style="width: 100%;">
+                    <colgroup>
+                      <col span="1" style="width: 1%;">
+                      <col span="1" style="width: 59%;">
+                      <col span="1" style="width: 40%;">
+                    </colgroup>
                     <tbody>
                       <% @bookingsReceived.each do |booking| %>
                         <tr>
-                          <th scope="row">
+                          <td rowspan="2" style="padding-left: 0; padding-right: 0;">
                             <%= link_to item_path(booking.item) do %>
-                              <%= cl_image_tag booking.item.photo, width: 60, height: 60, crop: :fill%>
+                              <%= cl_image_tag booking.item.photo, width: 120, height: 120, crop: :fill%>
                             <% end %>
-                          </th>
-                          <td><h5 class="card-title"><%= booking.item.name %></h5></td>
-                          <td><p class="card-text">Request from
-                            <%= User.find_by(id: booking.item.user_id).email %></p></td>
-                          <h1><%= booking.date %></h1>
-                          <td>
+                          </td>
+                          <td style="text-align: center;"><h5 class="card-title"><%= booking.item.name %></h5></td>
+                          <td style="text-align: center;"><p><%= booking.date.strftime('%m-%d-%Y') %></p></td>
+
+
+                        </tr>
+                        <tr>
+                          <td style="text-align: center;"><p class="card-text">Requested by
+                            <%= User.find_by(id: booking.item.user_id).first_name %></p></td>
+                          <td style="text-align: center;">
                             <% if booking.status == 2 %>
                               <%= link_to update_booking_path(booking, booking_id: booking.id, status_id: 1), method: :put do %>
-                                <i class="fas fa-check-circle" style="color:green;"></i>
+                                <i class="fas fa-check-circle" style="color:green; font-size: 32px;"></i>
                               <% end %>
                               <%= link_to update_booking_path(booking, booking_id: booking.id, status_id: 3), method: :put do %>
-                                <i class="fas fa-times-circle ml-3" style="color:red;"></i>
+                                <i class="fas fa-times-circle ml-3" style="color:red; font-size: 32px;"></i>
                               <% end %>
                             <% elsif booking.status == 1 %>
                               accepted
@@ -98,6 +125,29 @@
                             <% end %>
                           </td>
                         </tr>
+                        <% if Date.parse("#{booking.date}") < Date.today && booking.status == 1%>
+                          <tr>
+                            <td></td>
+                            <td >
+                              <%= simple_form_for [booking, @review] do |f| %>
+                                <%= f.error_notification %>
+                                <%= f.input :body,
+                                            label: false,
+                                            required: false,
+                                            placeholder: "leave a review",
+                                            input_html: { rows: 4 } %>
+                            </td>
+                            <td>
+                                <%= f.input :rating,
+                                            collection: 1..5,
+                                            label: false,
+                                            required: true %>
+                                <%= f.input :user_id, as: :hidden, input_html: {value: booking.item.user_id }  %>
+                                <%= f.button :submit, 'Add Review', class: 'btn mt-1', style: "width: 100%; border-radius: 10px; color: white; background-color: black; font-family: 'Raleway', sans-serif; letter-spacing: 2px; font-size: 14px;"%>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
                       <% end %>
                     </tbody>
                   </table>
