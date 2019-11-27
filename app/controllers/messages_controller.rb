@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
     @user = current_user
     @messages = policy_scope(Message).order(created_at: :desc)
     @messagesReceived = Message.joins(:item).where("items.user_id = ?", current_user).order(created_at: :desc)
-    @received_messages = Message.where(item_id: current_user.items.map {|item| item.id}).select {|message| message.user_id != current_user.id}
+    #@received_messages = Message.where(item_id: current_user.items.map {|item| item.id}).select {|message| message.user_id != current_user.id}
 
   end
 
