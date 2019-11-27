@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @message = Message.new
+    @booking = Booking.new
 
     @markers =[ {
         lat: @item.latitude,

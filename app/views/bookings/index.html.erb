@@ -16,8 +16,8 @@
                       <% @bookings.each do |booking| %>
                         <tr>
                           <th scope="row">
-                            <%= link_to item_path(booking.item) do %>
-                              <%= cl_image_tag booking.item.photo, width: 60, height: 60, crop: :fill%>
+                            <%= link_to request_item_path(booking.item) do %>
+                              <!--%= cl_image_tag booking.item.photo, width: 60, height: 60, crop: :fill%-->
                             <% end %>
                           </th>
                           <td><h5 class="card-title"><%= booking.item.name %></h5></td>

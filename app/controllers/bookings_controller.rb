@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   def index
     @user = current_user
     @review = Review.new
-    @bookings = policy_scope(Booking).order(created_at: :asc)
+    @bookings = policy_scope(Booking).order(created_at: :desc)
     @bookingsReceived = Booking.joins(:item).where("items.user_id= ?", current_user)
 
   end
@@ -11,14 +11,10 @@ class BookingsController < ApplicationController
 
     @booking = Booking.new
     @booking.user = current_user
-    @booking.item = Item.find(booking_params[:item_id])
+    @booking.item_id = booking_params[:item_id]
     @booking.status = 2
     @booking.date = booking_params[:date]
-    puts '**********************************'
-    puts params[:start_date]
-    puts '**********************************'
-    # @booking.start_date = params[:start_date]
-    # @booking.end_date = params[:end_date]
+
     @booking.save!
     redirect_to bookings_path
     authorize @booking
