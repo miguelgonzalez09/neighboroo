@@ -84,6 +84,12 @@ class ItemsController < ApplicationController
     @message = Message.new
     @user = current_user
     authorize @item
+
+    @markers =[ {
+      lat: @item.latitude,
+      lng: @item.longitude,
+      infoWindow: render_to_string(partial: "/shared/info_window", locals: { item: @item })
+    }]
   end
 
 
