@@ -60,7 +60,7 @@
                           <td><p><strong>From: </strong>
                             <%= User.find_by(id: message.item.user_id).first_name %></p></td>
                           <td>
-                            <%= link_to index_thread_path(message, user_id: message.user.id, message_id: message.id) do %>
+                            <%= link_to message_path(message, user_id: message.user.id, message_id: message.id) do %>
                               <p><%= message.body %></p>
                             <% end %>
                           </td>
@@ -81,6 +81,50 @@
               </div>
               <div class="row no-gutters p-0">
                 <div class="col-12">
+                  <div class="container">
+                    <div class="row" style="height: 70%;">
+                      <%= @message.body %>
+                      From:  <%= @sender.first_name %>
+                    </div>
+                    <div class="row" style="height: 30%;">
+                      <div class="message">
+                        <%= simple_form_for @message, url: index_thread_path, :method => :post do |f| %>
+                          <div class="form-inputs message-form">
+                            <%= f.input :body,
+                                        label: false,
+                                        required: false,
+                                        autofocus: true,
+                                        as: :text,
+                                        input_html: { rows: 10 } %>
+
+                            <%= f.input :item_id,
+                                        value: params[:message_id],
+                                        as: :hidden,
+                                        input_html: { rows: 10 } %>
+                          </div>
+                          <div class="form-actions message-button">
+                            <%= f.button :submit, "Reply" %>
+                          </div>
+                        <% end %>
+
+                        <% if current_user.id != @message.item.user_id %>
+                          <%= simple_form_for @booking do |f| %>
+                            <div class="form-inputs booking-form">
+                              <%= f.input :date, wrapper_html: { class: 'flex-select' }, as: :date, html5: true %>
+                              <%= f.input :item_id,
+                                        value: 1,
+                                        as: :hidden,
+                                        input_html: { value: Message.last.item.id } %>
+                            </div>
+                            <div class="form-actions booking-button">
+                              <%= f.button :submit, "Book it" %>
+                            </div>
+                          <% end %>
+                        <% end %>
+
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

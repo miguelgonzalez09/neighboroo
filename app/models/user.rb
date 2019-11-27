@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :items, through: :bookings
   has_many :items, through: :messages
 
-
+  validates_presence_of :first_name
+  validates :email, uniqueness: true
   def incoming_bookings
     bookings = []
     self.items.each do |item|

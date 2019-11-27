@@ -8,7 +8,7 @@
     <div class="col">
       <div class="container-fluid p-0">
         <div class="row no-gutters p-0">
-          <div class="col-lg-6 col-xl-4 justify-content-center" style="padding: 0 20px 50px 20px;">
+          <div class="col-lg-7 col-xl-5 justify-content-center" style="padding: 0 20px 50px 20px;">
             <div class="row no-gutters p-0" style="z-index: 5; height: 20vh; background: white; position: sticky; top: 0;">
               <div class="search bar" style="margin: auto;">
                 <%= form_tag items_path, method: :get, class: 'search-form' do %>
@@ -80,14 +80,16 @@
                     </div>
                     <div class="row" style="height: 60%;">
                       <div class="message">
-                        <%= simple_form_for [@item, @message] do |f| %>
+                        <%= simple_form_for [@item, @message],url: item_messages_path(@item) do |f| %>
                           <div class="form-inputs message-form">
                             <%= f.input :body,
                                         label: false,
                                         required: false,
                                         autofocus: true,
                                         as: :text,
-                                        input_html: { autocomplete: "Ask nicely :)", rows: 10 } %>
+                                        placeholder: "Ask nicely :)",
+                                        input_html: { rows: 10 } %>
+
                           </div>
                           <div class="form-actions message-button">
                             <%= f.button :submit, "Request" %>

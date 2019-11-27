@@ -58,22 +58,22 @@
                     <div class="form-inputs">
                       <%= f.input :photo, required: true, label: false %>
                       <%= f.input :photo_cache, as: :hidden %>
-                      <%= f.input :first_name, display: :inline,
-                                  autofocus: true,
+                      <%= f.input :first_name, display: :inline, label: false,
+                                  autofocus: true, placeholder: "first name",
                                   input_html: { autocomplete: "first name" }%>
-                      <%= f.input :address,
-                                  autofocus: true,
+                      <%= f.input :address, placeholder: "address",
+                                  autofocus: true, label: false,
                                   input_html: { autocomplete: "address" }%>
                       <%= f.input :description,
-                                  autofocus: true,
-                                  input_html: { autocomplete: "describe yourself briefly" }%>
-                      <%= f.input :password,
+                                  autofocus: true, label: false, placeholder: "a bit about yourself",
+                                  input_html: { autocomplete: "description" }%>
+                      <%= f.input :password, placeholder: "password",
                                   hint: "leave it blank if you don't want to change it",
-                                  required: false,
+                                  required: false, label: false,
                                   input_html: { autocomplete: "new-password" } %>
-                      <%= f.input :current_password,
+                      <%= f.input :current_password, placeholder: "current password",
                                   hint: "we need your current password to confirm your changes",
-                                  required: true,
+                                  required: true, label: false,
                                   input_html: { autocomplete: "current-password" } %>
                     </div>
                 </div>
@@ -81,20 +81,20 @@
                 <div class="col-5" style="padding-top: 134px; padding-left: 20px;">
                     <div class="form-inputs">
                       <%= f.input :last_name, display: :inline,
-                                  autofocus: true,
+                                  autofocus: true, label: false, placeholder: "last name",
                                   input_html: { autocomplete: "last name" }%>
                       <%= f.input :phone_number,
-                                  autofocus: true,
+                                  autofocus: true, label: false, placeholder: "phone number",
                                   input_html: { autocomplete: "phone number" }%>
-                      <%= f.input :email, required: true, autofocus: true, input_html: {style: "margin-bottom: 40px"} %>
+                      <%= f.input :email, required: true, label: false, autofocus: true, input_html: {style: "margin-bottom: 40px"} %>
 
 
                       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
                       <% end %>
 
-                      <%= f.input :password_confirmation,
-                                  required: false,
+                      <%= f.input :password_confirmation, label: false,
+                                  required: false, placeholder: "new password",
                                   input_html: { autocomplete: "new-password"} %>
                       <!--%= f.input :expiry_date, input_html: {id: "expiry-date-input"} do %-->
                         <!--%= f.input_field :expiry_date, as: :string, class: "form-control" %-->

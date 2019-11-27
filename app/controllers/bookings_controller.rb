@@ -8,10 +8,12 @@ class BookingsController < ApplicationController
   end
 
   def create
+
     @booking = Booking.new
     @booking.user = current_user
-    @booking.item = Item.find(params[:item_id])
+    @booking.item = Item.find(booking_params[:item_id])
     @booking.status = 2
+    @booking.date = booking_params[:date]
     puts '**********************************'
     puts params[:start_date]
     puts '**********************************'
@@ -38,6 +40,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:item_id, :user_id, :status)
+    params.require(:booking).permit(:item_id, :user_id, :status, :date)
   end
 end
