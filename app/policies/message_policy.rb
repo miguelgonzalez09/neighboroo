@@ -4,7 +4,9 @@ class MessagePolicy < ApplicationPolicy
       scope.where(user: user)
     end
   end
-
+  def index_thread?
+    true
+  end
   def show?
     true
   end

@@ -41,10 +41,10 @@
                         <tr>
                           <td>
                             <%= simple_form_for [booking, @review] do |f| %>
-                              <%= f.input :body, 
+                              <%= f.input :body,
                                           label: false,
                                           required: false %>
-                              <%= f.input :rating, 
+                              <%= f.input :rating,
                                           required: true %>
                               <%= f.input :user_id, as: :hidden, input_html: {value: booking.item.user_id }  %>
                               <%= f.button :submit, 'Add Review', class: 'btn mt-1', style: "text-align: right; border-radius: 10px; color: white; background-color: black; font-family: 'Raleway', sans-serif; letter-spacing: 2px; font-size: 20px;"%>
@@ -58,7 +58,7 @@
               </div>
 
               <div class="row no-gutters justify-content-center">
-                <div class="card mb-3 mr-4 p-4" style="width: 900px;">
+                <div class="card mb-3 mr-4 p-4" style="width: 1500px;">
                   <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Bookings Received</h2>
                   <table class="table table-hover">
                     <tbody>
@@ -72,6 +72,7 @@
                           <td><h5 class="card-title"><%= booking.item.name %></h5></td>
                           <td><p class="card-text">Request from
                             <%= User.find_by(id: booking.item.user_id).email %></p></td>
+                          <h1><%= booking.date %></h1>
                           <td>
                             <% if booking.status == 2 %>
                               <%= link_to update_booking_path(booking, booking_id: booking.id, status_id: 1), method: :put do %>
