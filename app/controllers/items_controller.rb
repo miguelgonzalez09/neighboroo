@@ -51,6 +51,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to your_items_path
     else
+      @items = Item.all
       render :new
     end
     authorize @item
