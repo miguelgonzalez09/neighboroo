@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
   resources :messages, only: [:index, :destroy]
 
+  resources :coupons, only: [:index, :create]
 end
 
 #devise_for :users, controllers: {
