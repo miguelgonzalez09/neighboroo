@@ -9,7 +9,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 initMapbox();
 
-
+// test comment
 
 
 
@@ -32,7 +32,7 @@ const sidenavClose = document.getElementById("sidenavClose");
 if (sidenavClose) {
   sidenavClose.addEventListener("click", function(){
     closeNav();
-  })  
+  })
 }
 
 function closeNav() {
