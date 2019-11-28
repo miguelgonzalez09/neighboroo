@@ -3,12 +3,13 @@ class Item < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   belongs_to :user
-  has_many :bookings, dependent: :destroy
+  has_many :bookings, dependent: :destroy 
+  has_many :messages, dependent: :destroy 
 
   validates_presence_of :photo, message: 'please :)'
   validates_presence_of :name, message: 'please :) No nameless items allowed!'
   validates_presence_of :address, message: 'please :)'
-  validates_presence_of :amazon
+  
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?

@@ -40,10 +40,10 @@
                             <% end %>
                           </td>
                           <td style="text-align: center;"><h5 class="card-title"><%= booking.item.name %></h5></td>
-                          <td style="text-align: center;"><p style="padding-left: 20px;"><%= booking.date %></p></td>
+                          <td style="text-align: center;"><p style="padding-left: 20px;"><%= booking.date.strftime('%m-%d-%Y') %></p></td>
                         </tr>
                         <tr>
-                          <td style="text-align: center;"><p class="card-text">Requested to
+                          <td style="text-align: center;"><p class="card-text">Requested from:
                             <%= User.find_by(id: booking.item.user_id).first_name %></p></td>
                           <td style="text-align: center;">
                             <% if booking.status == 1 %>
@@ -59,7 +59,7 @@
                             <% end %>
                           </td>
                         </tr>
-                        <% if Date.parse("#{booking.date}") < Date.today && booking.status == 1%>
+                        <% if (Date.parse("#{booking.date}") < Date.today) && booking.status == 1%>
                           <tr>
                             <td></td>
                             <td >
@@ -109,7 +109,7 @@
                         </tr>
                         <tr>
                           <td style="text-align: center;"><p class="card-text">Requested by
-                            <%= User.find_by(id: booking.item.user_id).first_name %></p></td>
+                            <%= User.find_by(id: booking.user_id).first_name %></p></td>
                           <td style="text-align: center;">
                             <% if booking.status == 2 %>
                               <%= link_to update_booking_path(booking, booking_id: booking.id, status_id: 1), method: :put do %>

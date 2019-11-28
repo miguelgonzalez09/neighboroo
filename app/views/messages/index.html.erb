@@ -30,7 +30,7 @@
                       <% @messages.each do |message| %>
                         <tr>
                           <th scope="row">
-                            <%= link_to item_path(message.item) do %>
+                            <%= link_to item_path(message.item.id) do %>
                               <%= cl_image_tag message.item.photo, width: 60, height: 60, crop: :fill%>
                             <% end %>
                           </th>

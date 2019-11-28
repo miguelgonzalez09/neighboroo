@@ -14,7 +14,6 @@ class BookingsController < ApplicationController
     @booking.item_id = booking_params[:item_id]
     @booking.status = 2
     @booking.date = booking_params[:date]
-
     @booking.save!
     redirect_to bookings_path
     authorize @booking
