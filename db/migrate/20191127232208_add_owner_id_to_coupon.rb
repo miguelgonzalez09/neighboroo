@@ -1,0 +1,5 @@
+class AddOwnerIdToCoupon < ActiveRecord::Migration[5.2]
+  def change
+    add_column :coupons, :ownerId, :integer
+  end
+end
