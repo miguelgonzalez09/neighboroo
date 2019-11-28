@@ -13,6 +13,6 @@ class Booking < ApplicationRecord
     @coupon.user_id = @current_user
     @coupon.ownerId = self.item.user.id
     @coupon.amazon = self.item.amazon
-    @coupon.save
+    @coupon.save!
   end
 end
