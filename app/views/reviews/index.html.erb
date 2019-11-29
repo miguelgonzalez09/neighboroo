@@ -8,7 +8,7 @@
     <div class="col pl-3">
       <div class="container-fluid p-0">
         <div class="row no-gutters p-0">
-          <div class="col-lg-8 col-xl-5 justify-content-center" style="padding: 0 20px 50px 20px;">
+          <div class="col-lg-8 col-xl-6 justify-content-center" style="padding: 0 20px 50px 20px;">
             <div class="row no-gutters p-0" style="z-index: 5; height: 20vh; background: white; position: sticky; top: 0;">
               <div class="search bar" style="margin: auto;">
                 <%= form_tag items_path, method: :get, class: 'search-form' do %>
@@ -28,7 +28,8 @@
                   <table class="table table-hover" style="width: 100%;">
                     <colgroup>
                       <col span="1" style="width: 25%;">
-                      <col span="1" style="width: 50%;">
+                      <col span="1" style="width: 25%;">
+                      <col span="1" style="width: 25%;">
                       <col span="1" style="width: 25%;">
                     </colgroup>
                     <tbody>
@@ -38,6 +39,7 @@
                             For: <%= review.booking.item.user.first_name %>
                           </th>
                           <td><h5 class="card-title"><%= review.body %></h5></td>
+                          <td><h5 class="card-title"><a href="https://www.amazon.com/Crock-Pot-SCCPVL600S-6-Quart-Portable-Stainless/dp/B003HF6PUO/ref=sr_1_4?crid=3JQZU83BDU7MS&keywords=crock+pot&qid=1575054940&sprefix=croc%2Caps%2C195&sr=8-4">Buy on Amazon</a></h5></td> 
                           <td style="text-align: center;">
                             <% (review.rating.to_i).times do %>
                               <span class="fas fa-star" style="color:#f5b130; letter-spacing: -3px; font-size: 16px;"></span>

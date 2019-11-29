@@ -15,6 +15,10 @@ class MessagePolicy < ApplicationPolicy
     true
   end
 
+  def thread_create?
+    true
+  end
+
   def destroy?
     record.user == user
   end

@@ -83,12 +83,11 @@
                 <div class="col-12">
                   <div class="container">
                     <div class="row" style="height: 70%;">
-                      <%= @message.body %>
-                      From:  <%= @sender.first_name %>
+                      Send to:  <%= @sender.first_name %>
                     </div>
                     <div class="row" style="height: 30%;">
                       <div class="message">
-                        <%= simple_form_for @message, url: index_thread_path, :method => :post do |f| %>
+                        <%= simple_form_for @message_new, url: thread_create_path, :method => :post do |f| %>
                           <div class="form-inputs message-form">
                             <%= f.input :body,
                                         label: false,
@@ -98,9 +97,11 @@
                                         input_html: { rows: 10 } %>
 
                             <%= f.input :item_id,
-                                        value: params[:message_id],
                                         as: :hidden,
-                                        input_html: { rows: 10 } %>
+                                        input_html: { :value => @message.item_id } %>
+                            <%= f.input :receiver_id,
+                                        as: :hidden,
+                                        input_html: { :value => @message.user_id } %>
                           </div>
                           <div class="form-actions message-button">
                             <%= f.button :submit, "Reply" %>

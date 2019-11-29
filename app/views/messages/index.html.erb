@@ -35,8 +35,8 @@
                             <% end %>
                           </th>
                           <td><h5><%= message.item.name %></h5></td>
-                          <td><p><strong>To: </strong>
-                            <%= User.find_by(id: message.item.user_id).first_name %></p></td>
+                          <td><p><strong>To: <%= message.receiver.first_name %> </strong>
+                            <%=  %></p></td>
                           <td><p>
                             <%= message.body %></p></td>
                         </tr>
@@ -58,7 +58,7 @@
                           </th>
                           <td><h5><%= message.item.name %></h5></td>
                           <td><p><strong>From: </strong>
-                            <%= User.find_by(id: message.item.user_id).first_name %></p></td>
+                            <%= User.find_by(id: message.user_id).first_name %></p></td>
                           <td>
                             <%= link_to index_thread_path(message, user_id: message.user.id, message_id: message.id) do %>
                               <p><%= message.body %></p>

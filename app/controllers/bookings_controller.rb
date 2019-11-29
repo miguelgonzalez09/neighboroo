@@ -4,7 +4,6 @@ class BookingsController < ApplicationController
     @review = Review.new
     @bookings = policy_scope(Booking).order(created_at: :desc)
     @bookingsReceived = Booking.joins(:item).where("items.user_id= ?", current_user)
-
   end
 
   def create

@@ -49,15 +49,13 @@
                         <% if user_signed_in? %>
                           <% if current_user.id != @item.user_id %>
                             <%= simple_form_for @booking do |f| %>
-                              <div class="form-inputs booking-form">
-                                <%= f.input :date, label: false, wrapper_html: { class: 'flex-select' }, as: :date, html5: true %>
-                                <%= f.input :item_id,
-                                          as: :hidden,
-                                          input_html: { value: @item.id } %>
-                              </div>
+                              
                               <div class="form-actions booking-button" style="text-align: right;">
-                                <%= f.button :submit, "Book it from #{@item.user.first_name}" %>
-                              </div>
+                                
+                                <%= link_to request_item_path(@item, id: @item.id) do %>
+                                  <div class="btn mb-3" >Ask <%= @item.user.first_name %></div>
+                                <% end %>
+                              </div> 
                             <% end %>
                           <% end %>
                         <% else %>
