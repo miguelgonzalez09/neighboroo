@@ -44,9 +44,7 @@
                   <div class="card-body px-5">
                     <h2 class="card-title"><%= @item.name %></h2>
                     <p class="card-text"><%= @item.description %></p>
-                    <div class="show-connect">
-                      <i class="fas fa-share-alt show-share"></i>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -88,7 +86,7 @@
                                         autofocus: true,
                                         as: :text,
                                         placeholder: "Ask nicely :)",
-                                        input_html: { rows: 10 } %>
+                                        input_html: { rows: 5 } %>
 
                           </div>
                           <div class="form-actions message-button">

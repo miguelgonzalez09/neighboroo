@@ -45,11 +45,11 @@
                         <tr>
                           <td style="text-align: center;"><p class="card-text">Requested from:
                             <%= User.find_by(id: booking.item.user_id).first_name %></p></td>
-                          <td style="text-align: center;">
+                          <td style="text-align: center;color: green;">
                             <% if booking.status == 1 %>
                               accepted
                             <% elsif booking.status == 2 %>
-                              <div style="text-align: center;">
+                              <div style="text-align: center;color: red;">
                                 <%= link_to booking_path(booking, booking_id: booking.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
                                   <i class="fas fa-trash-alt ml-3 mr-5" style="color:grey; font-size: 32px;"></i>
                                 <% end %>
@@ -59,7 +59,7 @@
                             <% end %>
                           </td>
                         </tr>
-                        <% if (Date.parse("#{booking.date}") < Date.today) && booking.status == 1%>
+                        <% if (Date.parse("#{booking.date}") == Date.today) && booking.status == 1%>
                           <tr>
                             <td></td>
                             <td >

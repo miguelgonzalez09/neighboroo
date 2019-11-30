@@ -24,31 +24,9 @@
             <div class="row no-gutters mb-5 p-0">
               <div class="col-12">
                 <div>
-                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Messages Sent</h2>
-                  <table class="table table-hover">
-                    <tbody>
-                      <% @messages.each do |message| %>
-                        <tr>
-                          <th scope="row">
-                            <%= link_to item_path(message.item.id) do %>
-                              <%= cl_image_tag message.item.photo, width: 60, height: 60, crop: :fill%>
-                            <% end %>
-                          </th>
-                          <td><h5><%= message.item.name %></h5></td>
-                          <td><p><strong>To: <%= message.receiver.first_name %> </strong>
-                            <%=  %></p></td>
-                          <td><p>
-                            <%= message.body %></p></td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div>
                   <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Messages Received</h2>
                   <table class="table table-hover">
-                    <tbody>
+                   <tbody>
                       <% @messagesReceived.each do |message| %>
                         <tr>
                           <th scope="row">
@@ -66,7 +44,29 @@
                           </td>
                         </tr>
                       <% end %>
-                    </tbody>
+                    </tbody> 
+                  </table>
+                </div>
+
+                <div>
+                  <h2 class=" mb-3 pb-5" style="font-family: 'Permanent Marker', cursive; letter-spacing: 2px; text-align: left;">Messages Sent</h2>
+                  <table class="table table-hover">
+                    <tbody>
+                        <% @messages.each do |message| %>
+                          <tr>
+                            <th scope="row">
+                              <%= link_to item_path(message.item.id) do %>
+                                <%= cl_image_tag message.item.photo, width: 60, height: 60, crop: :fill%>
+                              <% end %>
+                            </th>
+                            <td><h5><%= message.item.name %></h5></td>
+                            <td><p><strong>To: <%= message.receiver.first_name %> </strong>
+                              <%=  %></p></td>
+                            <td><p>
+                              <%= message.body %></p></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
                   </table>
                 </div>
               </div>
@@ -90,3 +90,6 @@
     </div>
   </div>
 </div>
+
+
+  
